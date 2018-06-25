@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewIdR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/textViewTitolo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@id/textViewIdR"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textViewCategoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@id/textViewTitolo"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textViewFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@id/textViewCategoria"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textViewIdP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@id/textViewFoto"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textViewPrezzo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@id/textViewIdP"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/textViewNome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_below="@id/textViewPrezzo"
+            android:layout_alignParentLeft="true"/>
+
+        <Button
+            android:id="@+id/buttonQrCode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="QRCode"
+            android:text="Convalida!"
+            android:layout_below="@id/textViewNome"
+            android:layout_alignParentLeft="true"/>
+
+        <WebView
+            android:id="@+id/paypalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/buttonQrCode"
+            android:layout_alignParentLeft="true"/>
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
