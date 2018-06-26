@@ -63,10 +63,13 @@ public class ElencoProposteAdapter extends ArrayAdapter<ElencoProposte> {
         TextView nomeUtente = listItem.findViewById(R.id.textViewNome);
         nomeUtente.setText("Nome utente: "+record.getNomeUtente());
 
+        //OLD
+        /*
         WebView webView = listItem.findViewById(R.id.paypalButton);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.loadUrl(URL+"paypal");
+        */
 
         return listItem;
     }

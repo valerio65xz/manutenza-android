@@ -90,7 +90,7 @@ public class ElencoProposteActivity extends FragmentActivity {
                     Log.e("ElencoProposteActivity", "Risultato: "+barcode.displayValue);
 
                     //Da qui chiamo il metodo per validare il pagamento
-                    validateJob();
+                    validateJob(7);
                     //scanResult.setText(barcode.displayValue);
                 } else {
                     Toast.makeText(this, "No result found", Toast.LENGTH_LONG).show();
@@ -104,7 +104,7 @@ public class ElencoProposteActivity extends FragmentActivity {
     }
 
     //Invio una richiesta a Spring per convalidare il lavoro
-    private void validateJob(){
+    private void validateJob(final int id){
         //creating a string request to send request to the url
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL+"validateJob",
                 new Response.Listener<String>() {
@@ -135,7 +135,7 @@ public class ElencoProposteActivity extends FragmentActivity {
             protected Map<String, String> getParams()
             {
                 Map<String, String> params = new HashMap<>();
-                //params.put("email", email);
+                params.put("id", ""+id);
                 return params;
             }
         };
