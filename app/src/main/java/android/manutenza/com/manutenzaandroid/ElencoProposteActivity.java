@@ -36,6 +36,7 @@ import static android.manutenza.com.manutenzaandroid.MainActivity.URL;
 public class ElencoProposteActivity extends FragmentActivity {
 
     private ArrayList<AndroidInfo> elencoProposte;
+    private String email;
 
     //Per QRCODE
     private static final int BARCODE_READER_REQUEST_CODE = 1;
@@ -48,8 +49,10 @@ public class ElencoProposteActivity extends FragmentActivity {
 
         //Ottento l'oggetto tramite decodifica JSON
         String elencoProposteJson = getIntent().getStringExtra("proposte");
+        String emailJson = getIntent().getStringExtra("email");
         Gson gson = new Gson();
         elencoProposte = gson.fromJson(elencoProposteJson, new TypeToken<List<AndroidInfo>>(){}.getType());
+        email = gson.fromJson(emailJson, String.class);
 
         //Definisco un ArrayList relativa all'oggetto cbe rappresenta la mia query, e lo popolo a seconda di quanti ne ho
         ArrayList<ElencoProposte> elencoProposteArray = new ArrayList<>();
@@ -136,6 +139,7 @@ public class ElencoProposteActivity extends FragmentActivity {
             {
                 Map<String, String> params = new HashMap<>();
                 params.put("id", ""+id);
+                params.put("email", ""+email);
                 return params;
             }
         };

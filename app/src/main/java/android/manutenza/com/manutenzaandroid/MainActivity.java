@@ -316,6 +316,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(activity, ElencoProposteActivity.class);
                                 intent.putExtra("proposte", elencoProposteJson);
+                                intent.putExtra("email", email);
                                 startActivity(intent);
                             }
 
