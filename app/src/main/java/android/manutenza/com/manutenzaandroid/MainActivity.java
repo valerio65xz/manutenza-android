@@ -4,6 +4,8 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.location.Location;
 import android.location.LocationManager;
@@ -36,6 +38,9 @@ import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.gson.Gson;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -145,7 +150,14 @@ public class MainActivity extends AppCompatActivity {
                                 if (response.getError() != null) {
                                     Toast.makeText(activity, "Errore: "+response.getError(), Toast.LENGTH_LONG).show();
                                 } else {
+                                    //Log.e("MainAcitivity", "JSON: "+response);
                                     email = response.getJSONObject().optString("email");
+
+                                    //AsyncTask per prendere l'immagine del profilo di facebook
+                                    /*SendProfilePicture runner = new SendProfilePicture();
+                                    String id = response.getJSONObject().optString("id");
+                                    runner.execute(id);*/
+
                                     //Toast.makeText(activity, "Email: "+email, Toast.LENGTH_LONG).show();
                                     //Richiamo il metodo che mi preleva le info dal Web Server Spring
                                     getElencoProposte();
@@ -171,7 +183,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     //Avvio la localizzazione sul Thread principale
     public void near(View v){
 
@@ -283,8 +294,6 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
-                        //Toast.makeText(getApplicationContext(), "Entro fase 2", Toast.LENGTH_SHORT).show();
 
                         try {
                             //getting the whole json object from the response

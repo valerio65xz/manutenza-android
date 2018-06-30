@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
-import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,6 +37,8 @@ public class ElencoProposteActivity extends FragmentActivity {
 
     private ArrayList<AndroidInfo> elencoProposte;
     private String email;
+    private ListView listView;
+    private int idPropostaSelezionata;
 
     //Per QRCODE
     private static final int BARCODE_READER_REQUEST_CODE = 1;
@@ -45,7 +47,7 @@ public class ElencoProposteActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_proposte);
-        ListView listView = findViewById(R.id.listViewProposte);
+        listView = findViewById(R.id.listViewProposte);
 
         //Ottento l'oggetto tramite decodifica JSON
         String elencoProposteJson = getIntent().getStringExtra("proposte");
@@ -75,6 +77,9 @@ public class ElencoProposteActivity extends FragmentActivity {
 
     //Implementazione mediante libreria Google Play Services - Vision e libreria di NKDroid
     public void QRCode(View v){
+
+        //Imposto la proposta scelta
+        idPropostaSelezionata = Integer.parseInt(""+v.getTag());
         Intent intent = new Intent(getApplicationContext(), BarcodeCaptureActivity.class);
         startActivityForResult(intent, BARCODE_READER_REQUEST_CODE);
     }
@@ -89,16 +94,22 @@ public class ElencoProposteActivity extends FragmentActivity {
                     Point[] p = barcode.cornerPoints;
 
                     //A questo punto si ritorna il valore ad una sub activity o altro. Io lo mostro nel log
-                    Toast.makeText(this, "QRCode: "+barcode.displayValue, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this, "QRCode: "+barcode.displayValue, Toast.LENGTH_LONG).show();
                     Log.e("ElencoProposteActivity", "Risultato: "+barcode.displayValue);
 
-                    //Da qui chiamo il metodo per validare il pagamento
-                    validateJob(7);
-                    //scanResult.setText(barcode.displayValue);
+                    try{
+                        //Da qui chiamo il metodo per validare il pagamento, soltanto se l'ID corrisponde
+                        if (Integer.parseInt(barcode.displayValue) == idPropostaSelezionata) validateJob(idPropostaSelezionata);
+                        else Toast.makeText(this, "Il QRCode scansionato non corrisponde alla proposta selezionata.", Toast.LENGTH_LONG).show();
+                    }
+                    catch (NumberFormatException e){
+                        Toast.makeText(this, "Impossibile identificare il QRCode scansionato", Toast.LENGTH_LONG).show();
+                        Log.e("ElencoProposteActivity", "NumberFormatException when scanning QRCode");
+                    }
+
                 } else {
                     Toast.makeText(this, "No result found", Toast.LENGTH_LONG).show();
                     Log.e("ElencoProposteActivity", "No result found");
-                    //scanResult.setText("No Result Found");
                 }
             }
         } else {

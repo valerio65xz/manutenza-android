@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,10 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.manutenza.com.manutenzaandroid.MainActivity.URL;
-
-/**
- * Created by vale- on 24/06/2018.
- */
 
 public class ElencoProposteAdapter extends ArrayAdapter<ElencoProposte> {
 
@@ -62,6 +59,10 @@ public class ElencoProposteAdapter extends ArrayAdapter<ElencoProposte> {
 
         TextView nomeUtente = listItem.findViewById(R.id.textViewNome);
         nomeUtente.setText("Nome utente: "+record.getNomeUtente());
+
+        //Per impostare il tag relativo ad una proposta
+        Button buttonQrCode = listItem.findViewById(R.id.buttonQrCode);
+        buttonQrCode.setTag(""+record.getIdProposta());
 
         //OLD
         /*
