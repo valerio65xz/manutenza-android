@@ -23,9 +23,6 @@
         </activity>
 
         <activity
-            android:name=".ManutentiActivity"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".ElencoProposteActivity"
             android:screenOrientation="portrait"/>
         <activity
