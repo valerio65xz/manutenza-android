@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     //Per QRCODE e URL
     private static final int BARCODE_READER_REQUEST_CODE = 1;
-    protected static final String URL = "http://192.168.42.96:8080/";
+    protected static final String URL = "http://192.168.1.5:8080/";
 
     //Callback Facebook
     private CallbackManager callbackManager;
